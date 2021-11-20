@@ -5,6 +5,20 @@ const {bots, playerRecord} = require('./data')
 const {shuffleArray} = require('./utils')
 
 app.use(express.json())
+app.use(express.static("public"));
+
+/* Huh. So we need both app.get because of how the index.html is set up. 
+<link rel="stylesheet" href="/styles"> && <script src="/js"></script>
+app.get("/styles", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/index.css"));
+});
+app.get("/js", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/index.js"));
+});
+
+If those lines in index.html instead were:
+<link rel="stylesheet" href="./index.css"> && <script src="./index.js"></script>
+Then we would not need the 2 app.get because it would be able to properly access those files which are also located in the public folder. At least when hosting locally. But maybe that won't work when deployed, which is why the 2 app.get were recommended? Will test soon */
 
 app.get('/api/robots', (req, res) => {
     try {
