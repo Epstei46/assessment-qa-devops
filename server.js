@@ -1,7 +1,7 @@
 // include and initialize the rollbar library with your access token
 var Rollbar = require('rollbar')
 var rollbar = new Rollbar({
-  accessToken: 'ce4de799a70b486eb606ba47d5c8c9b6',
+  accessToken: '2b9f10410e574ba1988f075c6357bdca',
   captureUncaught: true,
   captureUnhandledRejections: true,
 })
@@ -10,7 +10,11 @@ var rollbar = new Rollbar({
 rollbar.log('Hello world!')
 
 /*
-Part 6: Deployment is completed.
+Part 6: Deployment is done as well as possible. The instructions for Part 6: Deployment are wrong. I tried setting up Heroku the way outlined in the intructions, a different way outlined below, by installing the npm package dotenv in case line 115 was not working properly (no change) and setting it up to use a .env file I created. 3 different methods, everything working on the deployed site just as well as when I was running it locally on server port 3000. HOWEVER, nothing on the deployed site is being updated to Rollbar. Here's why.
+
+In order to report deploys to Rollbar from my Heroku app
+
+https://docs.rollbar.com/docs/heroku
 */
 
 require("dotenv").config()
