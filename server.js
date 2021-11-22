@@ -1,7 +1,7 @@
 // include and initialize the rollbar library with your access token
 var Rollbar = require('rollbar')
 var rollbar = new Rollbar({
-  accessToken: '2b9f10410e574ba1988f075c6357bdca',
+  accessToken: 'ce4de799a70b486eb606ba47d5c8c9b6',
   captureUncaught: true,
   captureUnhandledRejections: true,
 })
@@ -10,11 +10,18 @@ var rollbar = new Rollbar({
 rollbar.log('Hello world!')
 
 /*
-Part 6: Deployment is done as well as possible. The instructions for Part 6: Deployment are wrong. I tried setting up Heroku the way outlined in the intructions, a different way outlined below, by installing the npm package dotenv in case line 115 was not working properly (no change) and setting it up to use a .env file I created. 3 different methods, everything working on the deployed site just as well as when I was running it locally on server port 3000. HOWEVER, nothing on the deployed site is being updated to Rollbar. Here's why.
+Part 6: Deployment is done as well as possible. The instructions for Part 6: Deployment are incomplete. The Procfile is all that is needed to get the deployed site working properly, but more is needed to connect the deployed site on Heroku to Rollbar.
 
-In order to report deploys to Rollbar from my Heroku app
+I tried setting up Heroku the way outlined in the intructions, a different way outlined below, by installing the npm package dotenv in case line 115 was not working properly (no change) and setting it up to use a .env file I created. 3 different methods, everything working on the deployed site just as well as when I was running it locally on server port 3000. HOWEVER, nothing on the deployed site is being updated to Rollbar. Tried swapping the access token above for the post_client_item token (currently using post_server_item tooken), but then Rollbar wasn't working at all.
 
+In order to report deploys to Rollbar from my Heroku app, it is suggested to use the free Deploy Hook add-on from Heroku. While this is a free option, it will not allow me to do that on Heroku until I add a credit card. 
 https://docs.rollbar.com/docs/heroku
+
+I was able to find an example on how to perform an HTTP post to URL of your choice, with the example looking like it is in a terminal, but that does not work in VS Code / Node?
+https://devcenter.heroku.com/articles/deploy-hooks
+
+There is a section at this site on Project Access Tokens & Account Access Tokens
+https://explorer.docs.rollbar.com/#section/Authentication/Project-access-tokens
 */
 
 require("dotenv").config()
