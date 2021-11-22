@@ -9,6 +9,11 @@ var rollbar = new Rollbar({
 // record a generic message and send it to Rollbar
 rollbar.log('Hello world!')
 
+/*
+Part 6: Deployment is completed.
+*/
+
+require("dotenv").config()
 const express = require('express')
 const path = require('path')
 const app = express()
@@ -25,18 +30,13 @@ app.get("/js", (req, res) => {
   res.sendFile(path.join(__dirname, "public/index.js"));
 });
 
-/* Huh. So we need both app.get because of how the index.html is set up. 
+/* Huh. So we need the 2 app.get above because of how the index.html is set up. 
 <link rel="stylesheet" href="/styles"> && <script src="/js"></script>
-app.get("/styles", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/index.css"));
-});
-app.get("/js", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/index.js"));
-});
 
 If those lines in index.html instead were:
 <link rel="stylesheet" href="./index.css"> && <script src="./index.js"></script>
-Then we would not need the 2 app.get because it would be able to properly access those files which are also located in the public folder. At least when hosting locally. But maybe that won't work when deployed, which is why the 2 app.get were recommended? Will test soon */
+
+Then we would not need the 2 app.get because it would be able to properly access those files which are also located in the public folder. At least when hosting locally. But maybe that won't work when deployed, which is why the 2 app.get were recommended? UPDATE: Tested, works just as well using either method */
 
 app.get('/api/robots', (req, res) => {
     rollbar.info("User clicked the See All Bots button")
@@ -112,7 +112,7 @@ app.get('/api/player', (req, res) => {
     }
 })
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || process.env.SERVER_PORT
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
